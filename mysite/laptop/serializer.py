@@ -27,6 +27,27 @@ class CharacteristicSerializer(serializers.ModelSerializer):
         fields = ['characteristic_title','characteristic_description']
 
 
+class LaptopListForBrandSerializer(serializers.ModelSerializer):
+    photo_laptop = PhotoSimpleSerializer(many=True)
+    category = CategorySimpleSerializer()
+
+    class Meta:
+        model = Laptop
+        fields = ['laptop_name','description','price',
+                  'brand','laptop_discount','photo_laptop','category']
+
+
+
+class LaptopListForCategorySerializer(serializers.ModelSerializer):
+    photo_laptop = PhotoSimpleSerializer(many=True)
+    brand = BrandLaptopSimpleSerializer()
+    class Meta:
+        model = Laptop
+        fields = ['laptop_name','description','price',
+                  'brand','laptop_discount','photo_laptop']
+
+
+
 class LaptopListSerializer(serializers.ModelSerializer):
     photo_laptop = PhotoSimpleSerializer(many=True)
     category = CategorySimpleSerializer()
@@ -38,14 +59,14 @@ class LaptopListSerializer(serializers.ModelSerializer):
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
-    category_laptop = LaptopListSerializer(many=True)
+    category_laptop = LaptopListForCategorySerializer(many=True)
     class Meta:
         model = CategoryLaptop
         fields = ['category_name','category_laptop']
 
 
 class BrandListSerializer(serializers.ModelSerializer):
-    brand_laptop = LaptopListSerializer(many=True)
+    brand_laptop = LaptopListForBrandSerializer(many=True)
     class Meta:
         model = BrandLaptop
         fields = ['brand_name','brand_laptop']
