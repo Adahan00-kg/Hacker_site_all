@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'laptop',
     'accessories',
     'user',
+    'rest_framework_swagger',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
