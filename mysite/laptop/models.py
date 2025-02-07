@@ -23,5 +23,5 @@ class PhotoLaptop(models.Model):
     color = models.CharField(max_length=150)
     laptop_connect = models.ForeignKey(Laptop,on_delete=models.CASCADE,related_name='color')
 
-
+#
 
