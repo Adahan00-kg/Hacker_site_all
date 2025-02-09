@@ -1,6 +1,6 @@
 from django.db.migrations.serializer import Serializer
 from rest_framework import serializers
-from .models import CategoryLaptop,BrandLaptop,Laptop,PhotoLaptop,Characteristic
+from .models import *
 
 
 class CategorySimpleSerializer(serializers.ModelSerializer):
