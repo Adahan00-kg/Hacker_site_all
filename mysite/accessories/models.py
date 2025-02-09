@@ -21,6 +21,7 @@ class AccessIMG(models.Model):
     img = models.ImageField(upload_to='img_accessories/', null=True, blank=True)
 
 
+
 class ParameterAccess(models.Model):
     accessories = models.ForeignKey(Accessories, related_name='accessories', on_delete=models.CASCADE)
     parameter = models.CharField(max_length=500)
