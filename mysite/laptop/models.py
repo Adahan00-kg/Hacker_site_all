@@ -18,10 +18,10 @@ class Laptop(models.Model):
 
 
 
+
 class PhotoLaptop(models.Model):
     img = models.FileField(upload_to='laptop_photo/')
     color = models.CharField(max_length=150)
     laptop_connect = models.ForeignKey(Laptop,on_delete=models.CASCADE,related_name='color')
 
-#
 
