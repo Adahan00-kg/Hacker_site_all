@@ -21,6 +21,7 @@ class Laptop(models.Model):
     price = models.PositiveIntegerField()
     category = models.ForeignKey(CategoryLaptop,on_delete=models.CASCADE,related_name='category_laptop')
     brand = models.ForeignKey(BrandLaptop,on_delete=models.CASCADE,related_name='brand_laptop')
+    available = models.BooleanField(default=True)
     laptop_discount = models.PositiveSmallIntegerField(null=True,blank=True,help_text='процент скидки')
     created_date = models.DateTimeField(auto_now_add=True)
 

@@ -3,10 +3,6 @@ from rest_framework import views, generics
 from .serializers import *
 
 
-class AccessoriesListView(generics.ListAPIView):
-    queryset = Accessories.objects.all()
-    serializer_class = AccessoriesSerializer
-
 
 class ShortAccessListView(generics.ListAPIView):
     queryset = Accessories.objects.all()
@@ -15,10 +11,21 @@ class ShortAccessListView(generics.ListAPIView):
 
 class AccessCreateView(generics.CreateAPIView):
     queryset = Accessories.objects.all()
-    serializer_class = AccessoriesSerializer
+    serializer_class = AccessoriesCreateSerializer
 
 
 class AccessoriesDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Accessories.objects.all()
-    serializer_class = AccessoriesSerializer
+    serializer_class = AccessoriesDetailSerializer
 
+class CategoryAccessView(generics.ListAPIView):
+    queryset = CategoryAccessories.objects.all()
+    serializer_class = CategoryAccessSerializer
+
+class BrandAccessView(generics.ListAPIView):
+    queryset = BrandAccessories.objects.all()
+    serializer_class = BrandAccessListSerializer
+
+class AccessSimilarListView(generics.ListAPIView):
+    queryset = Accessories.objects.all()
+    serializer_class = AccessSimilarSerializer
