@@ -16,7 +16,7 @@ class BrandAccessSerializer(serializers.ModelSerializer):
 class AIMGSerializer(serializers.ModelSerializer):
     class Meta:
         model = AccessIMG
-        fields = ['id', 'img']
+        fields = ['id', 'img', 'color']
 
 class PASerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,7 +26,7 @@ class PASerializer(serializers.ModelSerializer):
 
 class AccessoriesDetailSerializer(serializers.ModelSerializer):
     created_date = serializers.DateTimeField(format('%d - %m - %Y %H:%M'))
-    img_accessories = AIMGSerializer(many=True, read_only=True)
+    img_accessories = AIMGSerializer(many=True)
     accessories = PASerializer(many=True, read_only=True)
     category = CategorySerializer(read_only=True)
     brand =  BrandAccessSerializer(read_only=True)
