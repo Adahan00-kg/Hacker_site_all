@@ -83,3 +83,24 @@ class LaptopDetailSerializer(serializers.ModelSerializer):
         fields = ['id', 'laptop_name','description','price','laptop_discount',
                   'created_date','category','brand',
                   'characteristic_laptop','photo_laptop']
+
+
+
+##########for cart
+class LaptopImgSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhotoLaptop
+        fields = ['id','img','color']
+
+        
+class laptopForCartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Laptop
+        fields = ['laptop_name','description','price','brand']
+        
+        
+
+        
+        
+        
+        

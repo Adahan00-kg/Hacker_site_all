@@ -16,16 +16,30 @@ class UserProfileListViewC(generics.ListAPIView):
     serializer_class = UserProfileSerializer
 
 
+
+
 class CartDetailView(generics.UpdateAPIView):
-    queryset = Cart.objects.all()
+    queryset = UserProfile.objects.all()
     serializer_class = CartSerializer
 
-    def get_queryset(self):
-        return Cart.ojects.filter(user__id=self.request.user.id)
+
 
 class CartListView(generics.ListAPIView):
-    queryset = Cart.objects.all()
+    # queryset = Cart.objects.all()
     serializer_class = CartSerializer
 
     def get_queryset(self):
-        return Cart.ojects.filter(user__id=self.request.user.id)
+        return Cart.objects.filter(user__id=self.request.user.id)
+
+
+
+class CartItemCreateAPIView(generics.CreateAPIView):
+    serializer_class = CartItemCreateSerializer
+
+    def perform_create(self, serializer):
+        cart, created = Cart.objects.get_or_create(user=self.request.user)
+        serializer.save(cart=cart)
+
+
+class CartItemUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CartItemCreateSerializer
