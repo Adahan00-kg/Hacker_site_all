@@ -1,7 +1,7 @@
-﻿from cffi.model import char_array_type
-from rest_framework import serializers
+﻿from rest_framework import serializers
 from .models import *
 from laptop.serializer import laptopForCartItemSerializer,LaptopImgSerializer
+from accessories.serializers import ShortAccessSerializer
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,9 +17,11 @@ class CartItemCreateSerializer(serializers.ModelSerializer):
     laptop_id = serializers.PrimaryKeyRelatedField(queryset=Laptop.objects.all(),write_only=True,source='laptops')
     laptop_img = LaptopImgSerializer(read_only=True)
     img_id = serializers.PrimaryKeyRelatedField(queryset=PhotoLaptop.objects.all(),write_only=True,source='laptop_img')
+    accessories = ShortAccessSerializer(read_only=True)
+    accessories_id = serializers.PrimaryKeyRelatedField(queryset=Accessories.objects.all(),write_only=True,source='accessories')
     class Meta:
         model = CartItem
-        fields = ['id','laptops','laptop_id','quantity','laptop_img','img_id']
+        fields = ['id','laptops','laptop_id','quantity','laptop_img','img_id','accessories','accessories_id']
 
 
 
