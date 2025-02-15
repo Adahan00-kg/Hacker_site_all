@@ -12,8 +12,8 @@ services:
       gunicorn -b 0.0.0.0:8000 mysite.wsgi:application"
     volumes:
       - .:/app
-      - static_volume:/app/static
-      - media_volume:/app/media
+      - /home/ubuntu/Hacker_site_all/mysite/staticfile:/app/static
+      - /home/ubuntu/Hacker_site_all/mysite/media:/app/media
     ports:
       - "8000:8000"
     depends_on:
@@ -35,12 +35,10 @@ services:
     ports:
       - "80:80"
     volumes:
-      - static_volume:/app/static
-      - media_volume:/app/media
+      - /home/ubuntu/Hacker_site_all/mysite/staticfile:/app/static
+      - /home/ubuntu/Hacker_site_all/mysite/media:/app/media
     depends_on:
       - web
 
 volumes:
   postgres_data:
-  static_volume:
-  media_volume:
