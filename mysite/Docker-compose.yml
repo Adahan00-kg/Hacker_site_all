@@ -5,7 +5,7 @@
     web:
       build: .
       command: >
-        bash -c "./manage.py collectstatic --noinput && ./manage.py makemigrations && ./manage.py migrate && gunicorn -b 0.0.0.0:8000 it_education.wsgi:application"
+        bash -c "./manage.py collectstatic --noinput && ./manage.py makemigrations && ./manage.py migrate && gunicorn -b 0.0.0.0:8000 mysite.wsgi:application"
       volumes:
         - .:/app
         - /home/ubuntu/it_final/it_education/staticfiles:/app/static
