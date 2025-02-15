@@ -12,6 +12,26 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 
+
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['id', 'username', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = UserProfile.objects.create_user(**validated_data)
+        return user
+
+
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+
+
 class CartItemCreateSerializer(serializers.ModelSerializer):
     laptops = laptopForCartItemSerializer(read_only=True)
     laptop_id = serializers.PrimaryKeyRelatedField(queryset=Laptop.objects.all(),write_only=True,source='laptops')
