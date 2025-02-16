@@ -13,6 +13,15 @@ class AccessCreateView(generics.CreateAPIView):
     queryset = Accessories.objects.all()
     serializer_class = AccessoriesCreateSerializer
 
+class AccessSecondCreateView(generics.CreateAPIView):
+    queryset = Accessories.objects.all()
+    serializer_class = AccessoriesCreateSecondSerializer
+
+class AccessThordCreateView(generics.CreateAPIView):
+    queryset = Accessories.objects.all()
+    serializer_class = AccessoriesThordCreateSerializer
+
+
 
 class AccessoriesDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Accessories.objects.all()

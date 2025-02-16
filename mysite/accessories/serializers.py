@@ -52,6 +52,33 @@ class AccessoriesCreateSerializer(serializers.ModelSerializer):
         fields = ['id', 'category', 'brand', 'name', 'description', 'price', 'available', 'accessor_discount', 'created_date', 'img_accessories', 'accessories']
 
 
+class AccessoriesCreateSecondSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Accessories
+        fields = ['id', 'category', 'brand', 'name', 'description', 'price', 'available', 'accessor_discount', 'created_date', 'img_accessories', 'accessories']
+
+
+class AccessoriesThordCreateSerializer(serializers.ModelSerializer):
+    # Здесь many=True, т.к. аксессуар может иметь несколько изображений.
+    img_accessories = AIMGSerializer(many=True)
+
+    class Meta:
+        model = Accessories
+        fields = [
+            'id', 'category', 'brand', 'name', 'description', 'price',
+            'available', 'accessor_discount', 'created_date', 'img_accessories'
+        ]
+
+    def create(self, validated_data):
+        # Извлекаем данные для изображений
+        images_data = validated_data.pop('img_accessories', [])
+        # Создаем аксессуар
+        accessory = Accessories.objects.create(**validated_data)
+        # Создаем связанные изображения
+        for image_data in images_data:
+            AccessIMG.objects.create(accessories=accessory, **image_data)
+        return accessory
+
 class ShortAccessSerializer(serializers.ModelSerializer):
     class Meta:
         model = Accessories
