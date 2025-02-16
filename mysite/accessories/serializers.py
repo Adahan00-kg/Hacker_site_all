@@ -23,6 +23,15 @@ class PASerializer(serializers.ModelSerializer):
         model = ParameterAccess
         fields = ['id', 'parameter', 'value_parameter']
 
+class AIMGCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AccessIMG
+        fields = ['id', 'img', 'color']
+
+class PACreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ParameterAccess
+        fields = ['id', 'parameter', 'value_parameter']
 
 class AccessoriesDetailSerializer(serializers.ModelSerializer):
     created_date = serializers.DateTimeField(format('%d - %m - %Y %H:%M'))
@@ -34,13 +43,16 @@ class AccessoriesDetailSerializer(serializers.ModelSerializer):
         model = Accessories
         fields = ['id', 'name', 'description', 'price', 'available', 'img_accessories', 'accessories', 'category', 'brand', 'created_date']
 
+
 class AccessoriesCreateSerializer(serializers.ModelSerializer):
+    img_accessories = AIMGSerializer(many=True)
+    accessories = PASerializer(many=True)
     class Meta:
         model = Accessories
-        fields = ['id', 'name', 'description', 'price', 'available', 'img_accessories', 'accessories', 'category', 'brand']
+        fields = ['id', 'category', 'brand', 'name', 'description', 'price', 'available', 'accessor_discount', 'created_date', 'img_accessories', 'accessories']
+
 
 class ShortAccessSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Accessories
         fields = ['id', 'name', 'description', 'price', 'available']

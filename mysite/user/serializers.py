@@ -3,14 +3,15 @@ from .models import *
 from laptop.serializer import laptopForCartItemSerializer,LaptopImgSerializer
 from accessories.serializers import ShortAccessSerializer
 
+
+
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ['username', 'phone_number', 'email', 'password']
         extra_kwargs = {'password': {'write_only': True}}
-
-
-
 
 
 
