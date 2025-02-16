@@ -124,7 +124,7 @@ class UserProfileViewC(generics.RetrieveUpdateAPIView):
     serializer_class = UserProfileSerializer
 
     def get_queryset(self):
-        return UserProfile.ojects.filter(user__id=self.request.user.id)
+        return UserProfile.objects.filter(id=self.request.user.id)
 
 
 
@@ -143,7 +143,7 @@ class CartDetailView(generics.UpdateAPIView):
 
 
 class CartListView(generics.ListAPIView):
-    # queryset = Cart.objects.all()
+    queryset = Cart.objects.all()
     serializer_class = CartSerializer
 
     def get_queryset(self):
@@ -160,4 +160,5 @@ class CartItemCreateAPIView(generics.CreateAPIView):
 
 
 class CartItemUpdateDeleteAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CartItem.objects.all()
     serializer_class = CartItemCreateSerializer
