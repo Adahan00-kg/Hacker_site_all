@@ -85,15 +85,22 @@ class ShortAccessSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'price', 'available']
 
 
+class AccessForCategorySerializer(serializers.ModelSerializer):
+    img_accessories = AIMGSerializer(many=True)
+    class Meta:
+        model = Accessories
+        fields = ['id', 'name', 'description', 'price', 'available', 'img_accessories']
+
+
 class CategoryAccessSerializer(serializers.ModelSerializer):
-    category_access = ShortAccessSerializer(many=True,read_only=True)
+    category_access = AccessForCategorySerializer(many=True,read_only=True)
     class Meta:
         model = CategoryAccessories
         fields = ['id', 'category','category_access']
 
 
 class BrandAccessListSerializer(serializers.ModelSerializer):
-    brand_access = ShortAccessSerializer(many=True,read_only=True)
+    brand_access = AccessForCategorySerializer(many=True,read_only=True)
     class Meta:
         model = BrandAccessories
         fields = ['id', 'brand', 'brand_access']
